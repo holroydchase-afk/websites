@@ -14,4 +14,3 @@ Open `index.html` in a browser, or upload the whole folder to any static host
 - **Media** buttons link to the Gallery / Current Projects / Updates series on the old site.
 - The old **About** and **Connect** pages could not be retrieved; their content is folded into Our Story,
   Leadership, Mission Trips and Contact.
-- Photo alt text is generic; replace it with short descriptions of what each photo shows.
