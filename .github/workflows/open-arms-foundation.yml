@@ -1,0 +1,53 @@
+name: Open Arms Foundation site
+
+on:
+  push:
+    paths:
+      - "open-arms-foundation/**"
+      - ".github/workflows/open-arms-foundation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: open-arms-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  images:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download photos from the old site
+        run: open-arms-foundation/scripts/fetch-images.sh
+      - name: Commit any new photos
+        run: |
+          git add open-arms-foundation/assets/images
+          if git diff --cached --quiet; then echo "No new photos"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Add Open Arms Foundation photos from the old site"
+          git push
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: images
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Make sure photos are present
+        run: open-arms-foundation/scripts/fetch-images.sh
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: open-arms-foundation
+      - id: deployment
+        uses: actions/deploy-pages@v4
