@@ -291,7 +291,7 @@ address { font-style: normal; }
 .site-footer__cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; padding-block: 3rem; border-bottom: 1px solid color-mix(in srgb, var(--band-ink) 18%, transparent); }
 .site-footer__cta .btn-row { margin: 0; }
 .site-footer__line { font-family: var(--f-display); font-size: var(--step-3); line-height: 1.15; margin: 0; max-width: 20ch; }
-.site-footer__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; padding-block: 2.5rem; }
+.site-footer__grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 2rem; padding-block: 2.5rem; }
 .site-footer__grid > div { min-width: 0; }
 .site-footer__grid p, .site-footer__grid address { margin: 0; color: var(--band-muted); overflow-wrap: anywhere; }
 .site-footer .eyebrow { color: var(--sun); }
